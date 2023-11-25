@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Chatrooms</h1>
+
+    <section id="rooms">
+        {% for card in room_cards %}
+            {{ card|safe }}
+        {% endfor %}
+    </section>
+
+    <button 
+        name="create_room"
+        hx-get="/create_room"
+        hx-swap="beforeend"
+        hx-target="body"
+    >
+        Create room
+    </button>
+{% endblock %}

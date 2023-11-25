@@ -1,0 +1,16 @@
+<div id="modal" _="on closeModal remove me ">
+    <div id="modal-underlay" _="on click trigger closeModal"></div>
+    <form>
+        <label>
+            Room name: 
+            <input size="20" type="text" name="name" placeholder="Room Name" required>
+        </label>
+        <label>
+            Room password: 
+            <input size="20" type="password" name="password">
+        </label>
+
+        <button hx-post="/create_room" hx-swap="beforeend" hx-target="#rooms">Create room</button>
+        <button _="on click trigger closeModal">Cancel</button>
+    </form>
+</div>

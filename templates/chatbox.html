@@ -1,0 +1,27 @@
+<style>
+    .chatbox { 
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+        padding: 1em;
+        padding-top: 1.2em;
+        padding-bottom: 1.2em;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2em
+    }
+
+    .message-content { 
+        background-color: #cccc;
+        padding: 0.5em
+    }
+</style>
+
+<div class="chatbox">
+    {% for message in chatbox.messages %}
+        <div class="message">
+            <div>{{ message.sender }}:</div>
+            <div class="message-content">{{ message.content }}</div>
+        </div>
+    {% endfor %}
+</div>

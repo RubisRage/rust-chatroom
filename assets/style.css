@@ -1,0 +1,47 @@
+body {
+    background-color: #f4f4f4;
+}
+
+#modal {
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; 
+}
+
+#modal form {
+    background-color: #c6c6c6;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .7em;
+    padding: 2em;
+    width: 40vw;
+    box-shadow: .3em .3em .2em #aaaaaa;
+}
+
+#modal-underlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+#modal label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#modal input {
+    height: 1.2em;
+}
+

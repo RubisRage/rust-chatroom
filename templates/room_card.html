@@ -1,0 +1,10 @@
+<div>
+    {{ name }} 
+    <a href="http://localhost:3000/join/{{name}}"
+        {%if has_password %} 
+            hx-prompt="Enter this room's password." 
+        {% endif %}
+    >
+        Join 
+    </a>
+</div>
