@@ -1,10 +1,12 @@
 use crate::models::ChatRoom;
 use sqlx::sqlite::SqlitePool;
+pub type DatabasePool = SqlitePool;
 
-pub async fn get_rooms(pool: SqlitePool) -> Vec<ChatRoom> {
-    let rooms = sqlx::query_as::<_, ChatRoom>("SELECT name, password FROM chatrooms")
-        .fetch_all(&pool)
-        .await;
+pub async fn get_rooms(pool: DatabasePool) -> Vec<ChatRoom> {
+    let rooms =
+        sqlx::query_as::<_, ChatRoom>("SELECT name, password FROM chatrooms")
+            .fetch_all(&pool)
+            .await;
 
     if let Ok(rooms) = rooms {
         rooms
@@ -13,11 +15,12 @@ pub async fn get_rooms(pool: SqlitePool) -> Vec<ChatRoom> {
     }
 }
 
-pub async fn get_room_by_name(pool: SqlitePool, name: &str) -> ChatRoom {
-    let room = sqlx::query_as::<_, ChatRoom>("SELECT name, password FROM chatrooms WHERE name=?")
-        .bind(&name)
-        .fetch_one(&pool)
-        .await;
+pub async fn get_room_by_name(pool: DatabasePool, name: &str) -> ChatRoom {
+    let room =
+        sqlx::query_as("SELECT name, password FROM chatrooms WHERE name=?")
+            .bind(&name)
+            .fetch_one(&pool)
+            .await;
 
     if let Ok(room) = room {
         room
@@ -29,8 +32,11 @@ pub async fn get_room_by_name(pool: SqlitePool, name: &str) -> ChatRoom {
     }
 }
 
-pub async fn store_room(pool: SqlitePool, chatroom: &ChatRoom) -> Result<(), sqlx::Error> {
-    sqlx::query("INSERT INTO chatrooms (name, password) VALUES ( ?, ?);")
+pub async fn store_room(
+    pool: DatabasePool,
+    chatroom: &ChatRoom,
+) -> Result<(), sqlx::Error> {
+    sqlx::query("INSERT INTO chatrooms (name, password) VALUES (?, ?);")
         .bind(&chatroom.name)
         .bind(&chatroom.password)
         .execute(&pool)

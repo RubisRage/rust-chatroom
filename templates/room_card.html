@@ -1,6 +1,6 @@
 <div>
     {{ name }} 
-    <a href="http://localhost:3000/join/{{name}}"
+    <a hx-boost="true" href="/join/{{name}}"
         {%if has_password %} 
             hx-prompt="Enter this room's password." 
         {% endif %}
