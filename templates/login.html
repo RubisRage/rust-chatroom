@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<form id="login-form">
+    <fieldset id="inputs">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username"/>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password"/>
+    </fieldset>
+
+    <div id="submit-options"
+        hx-target-error="#inputs"
+        hx-swap="body"
+    >
+        <button hx-post="/login">LogIn</button>
+        <button hx-post="/signin" >SignIn</button>
+    </div>
+</form>
+
+{% endblock %}

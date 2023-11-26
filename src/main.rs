@@ -1,4 +1,5 @@
 mod app;
+mod auth;
 mod database;
 mod error;
 mod models;

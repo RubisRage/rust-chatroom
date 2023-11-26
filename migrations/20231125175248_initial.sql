@@ -1,7 +1,7 @@
 -- Add migration script here
 
 CREATE TABLE IF NOT EXISTS chatrooms (
-    name VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) PRIMARY KEY NOT NULL,
     password VARCHAR(255)
 );
 

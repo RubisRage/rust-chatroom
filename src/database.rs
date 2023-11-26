@@ -4,7 +4,7 @@ pub type DatabasePool = SqlitePool;
 
 pub async fn get_rooms(pool: DatabasePool) -> Vec<ChatRoom> {
     let rooms =
-        sqlx::query_as::<_, ChatRoom>("SELECT name, password FROM chatrooms")
+        sqlx::query_as!(ChatRoom, "SELECT name, password FROM chatrooms")
             .fetch_all(&pool)
             .await;
 
@@ -39,6 +39,21 @@ pub async fn store_room(
     sqlx::query("INSERT INTO chatrooms (name, password) VALUES (?, ?);")
         .bind(&chatroom.name)
         .bind(&chatroom.password)
+        .execute(&pool)
+        .await?;
+
+    Ok(())
+}
+
+use crate::auth::User;
+
+pub async fn store_user(
+    pool: DatabasePool,
+    user: &User,
+) -> Result<(), sqlx::Error> {
+    sqlx::query("INSERT INTO users (username, password) VALUES (?, ?);")
+        .bind(&user.username)
+        .bind(&user.password())
         .execute(&pool)
         .await?;
 
